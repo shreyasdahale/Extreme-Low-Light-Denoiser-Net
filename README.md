@@ -1,42 +1,53 @@
-# Extreme-Low-Light-Denoiser-Net
+### Extreme Low-Light Denoiser Net
 
-## Overview
+This repository contains the implementation of a neural network designed to denoise low-light images, using a scaled-down version of the Pyramid Real Image Denoising Network (PriDNet). The network was built and trained using PyTorch.
 
-This project implements a neural network based on the Pyramid Real Image Denoising Network (PRIDNet) structure for denoising low-light images. The network is built using PyTorch and has been scaled down from the original PriDNet architecture to suit the specific requirements of this project.
+#### Overview
 
-## PRIDNet Structure
+PRIDNet, or Pyramid Real Image Denoising Network, is a specialized neural network architecture aimed at effectively denoising images captured in extremely low-light conditions. This network leverages a pyramid structure to progressively refine the denoised output at multiple scales, which is essential for capturing both fine details and global structures in the images. This hierarchical approach ensures that the network can manage noise effectively across various levels of detail in the image.
 
 ![PRIDNet Structure](download.png)
 
-The PRIDNet (Pyramid Real Image Denoising Network) architecture is designed to effectively remove noise from real images, particularly those captured in low-light conditions. The network employs a pyramid structure that progressively refines the image resolution while denoising, allowing it to handle noise at multiple scales.
+#### Architecture
 
-## Implementation Details
+The PRIDNet architecture is composed of several key components:
+
+1. **Pyramid Decomposition**: The input image is decomposed into multiple sub-bands through a series of downsampling operations. This process helps in capturing multi-scale features, which are crucial for handling different types of noise.
+
+2. **Feature Extraction and Denoising**: Each level of the pyramid contains convolutional layers that extract features and perform denoising. These layers are designed to work at different scales, allowing the network to focus on both global structures and fine details.
+
+3. **Reconstruction**: The denoised features from each pyramid level are upsampled and combined to reconstruct the final denoised image. This step ensures that the image retains its original resolution while significantly reducing noise.
+
+4. **Residual Layer**: An additional residual layer was added to the network to help retain the original image details while focusing on denoising, thus improving the overall reconstruction quality.
+
+#### Implementation
+
+The implementation in this repository is a scaled-down version of PriDNet, which retains the core ideas but simplifies the network to make it computationally more efficient and easier to train.
 
 - **Framework**: PyTorch
-- **Model**: Scaled-down PriDNet
-- **Epochs**: 300
-- **Performance**: Achieved an accuracy of approximately 18.93 dB on the testing data
+- **Training**: The network was trained for 300 epochs, achieving a testing accuracy of approximately 18.93 dB.
 
-## Getting Started
+### Getting Started
 
-### Prerequisites
+#### Prerequisites
 
-- Python 3.8+
-- PyTorch 1.8+
-- Jupyter Notebook
+- Python 3.x
+- PyTorch
 
-### Training the Model
-
-1. Prepare your dataset and place it in the `Train/` directory.
-
-2. Run the training script:
+#### Training & Prediction:
+   For this, run:
    ```bash
    python Main.py
    ```
-## Results
+   Adjust the parameters in the `.py` script as needed for your dataset and training configuration.
+   The reconstructed images will appear in the `./test/predicted/` directory, they can be checked after prediction. The reconstructed images will be denoised and brightened.
 
-After training the model for 300 epochs, it achieved an accuracy of approximately 18.93 dB on the testing data. Further improvements can be made by fine-tuning the model and experimenting with different hyperparameters.
+### Results
 
-## Acknowledgements
+After training for 300 epochs, the model achieved a testing accuracy of approximately 18.93 dB, indicating a significant reduction in noise for low-light images.
 
-- [Original PRIDNet Paper](https://arxiv.org/pdf/1908.00273)
+### References
+
+- Original PRIDNet paper: [Pyramid Real Image Denoising Network](https://arxiv.org/pdf/1908.00273)
+
+For more details, please refer to the [project repository](https://github.com/shreyasdahale/Extreme-Low-Light-Denoiser-Net).
