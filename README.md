@@ -27,7 +27,7 @@ The PRIDNet (Pyramid Real Image Denoising Network) architecture is designed to e
 
 ### Training the Model
 
-1. Prepare your dataset and place it in the `data/` directory.
+1. Prepare your dataset and place it in the `Train/` directory.
 
 2. Run the training script:
    ```bash
